@@ -1,7 +1,41 @@
+#version circleci
 version: 2.1
+# packages using
 orbs:
   node: circleci/node@3.0.0
+  docker: circleci/docker@1.4.0
+# custom jobs
+jobs:
+  build-and-push:
+    environment:
+      DOCKER_IMAGE: nguyenhuunghia/docker-cicd-react-app
+      DOCKER_TAG: latest
+    executor: docker/docker
+    steps:
+      - setup_remote_docker
+      - checkout
+      - docker/check:
+          docker-username: DOCKER_USERNAME
+          docker-password: DOCKER_PASSWORD
+      - docker/build:
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - docker/push:
+          digest-path: /tmp/digest.txt
+          image: $DOCKER_IMAGE
+          tag: $DOCKER_TAG
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+# main scripts
 workflows:
-  node-tests:
+  my-pipeline:
     jobs:
       - node/test
+      - build-and-push:
+          requires:
+            - node/test
+          filters:
+            branches:
+              only:
+                - master
