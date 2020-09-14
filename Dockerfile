@@ -1,6 +1,6 @@
 FROM node:14-stretch-slim as build
 WORKDIR /app
-COPY . /app/
+COPY . /app
 RUN npm install && npm run build
 
 FROM nginx:latest
