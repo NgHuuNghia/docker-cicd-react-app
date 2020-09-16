@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>React docker demo!</p>
+        <p>React docker demo final!</p>
       </header>
     </div>
   );

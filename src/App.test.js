@@ -4,6 +4,6 @@ import App from "./App";
 
 test("renders learn react link", () => {
   const { getByText } = render(<App />);
-  const linkElement = getByText(/React docker demo! test failed CI/i);
+  const linkElement = getByText(/React docker demo final!/i);
   expect(linkElement).toBeInTheDocument();
 });
