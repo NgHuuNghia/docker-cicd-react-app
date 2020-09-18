@@ -28,6 +28,13 @@ jobs:
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
+  # deploy:
+  #   - executor: docker/docker
+  #   - steps:
+  #       - add_ssh_keys:
+  #         fingerprints:
+  #           - "can not be created permission sudoers"
+  #       - run: ssh -oStrictHostKeyChecking=no huunghianguyen@gwfpt.digihcs.com -p 22113 './deploy/deploy.sh'
 # main scripts
 workflows:
   my-pipeline:
@@ -40,3 +47,6 @@ workflows:
             branches:
               only:
                 - master
+      - deploy:
+        requires:
+          - build-and-push

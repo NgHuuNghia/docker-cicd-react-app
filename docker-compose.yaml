@@ -1,0 +1,7 @@
+# docker-compose cannot be installed # permission sudoers
+version: "3.3"
+services:
+  mywebsite:
+    image: nguyenhuunghia/docker-cicd-react-app
+    ports:
+      - "13609:80"
